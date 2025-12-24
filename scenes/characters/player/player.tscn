@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=3 uid="uid://b21lwkvpf3grc"]
+
+[ext_resource type="Script" uid="uid://bqhgjlgmdpl67" path="res://scenes/characters/player/player.gd" id="1_t61fv"]
+[ext_resource type="Texture2D" uid="uid://cevj7lq263jt" path="res://assets/art/tileset_2023_toby.png" id="2_t61fv"]
+
+[sub_resource type="Gradient" id="Gradient_va5m3"]
+offsets = PackedFloat32Array(0.452381, 0.472222)
+colors = PackedColorArray(0.129558, 0.129558, 0.129558, 0.713726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t61fv"]
+gradient = SubResource("Gradient_va5m3")
+fill = 1
+fill_from = Vector2(0.504274, 0.491453)
+fill_to = Vector2(0.444444, 0.525641)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t61fv"]
+atlas = ExtResource("2_t61fv")
+region = Rect2(24, 0, 16, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_686vu"]
+atlas = ExtResource("2_t61fv")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hss88"]
+atlas = ExtResource("2_t61fv")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_blysn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t61fv")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_686vu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hss88")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv5x3"]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t61fv"]
+size = Vector2(7, 4)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 21
+script = ExtResource("1_t61fv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -32.0
+offset_top = -28.0
+offset_right = 32.0
+offset_bottom = 36.0
+texture = SubResource("GradientTexture2D_t61fv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_blysn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_hv5x3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="SwordKillBox" type="Area2D" parent="."]
+process_mode = 4
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordKillBox"]
+position = Vector2(3.5, 0)
+shape = SubResource("RectangleShape2D_t61fv")
+
+[connection signal="body_entered" from="SwordKillBox" to="." method="_on_sword_kill_box_body_entered"]

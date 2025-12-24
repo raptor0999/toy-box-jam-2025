@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkor4ca4lna84"]
+
+[ext_resource type="Script" uid="uid://cqbo5ayy3r4hg" path="res://scripts/audio_player.gd" id="1_ksebb"]
+[ext_resource type="AudioStream" uid="uid://1h2hmw8xw5l6" path="res://assets/audio/music/04 Morning Shower.mp3" id="2_8emke"]
+
+[node name="AudioPlayer" type="Node2D"]
+script = ExtResource("1_ksebb")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8emke")
+
+[node name="SFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8emke")

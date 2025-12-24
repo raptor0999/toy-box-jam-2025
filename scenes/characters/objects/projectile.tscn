@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cq07ldvsywuf6"]
+
+[ext_resource type="Texture2D" uid="uid://dwx7lnwvyrvqk" path="res://assets/art/toyBoxJam3b.png" id="1_punej"]
+[ext_resource type="Script" uid="uid://bxhurytpqv4q7" path="res://scenes/characters/objects/projectile.gd" id="1_yntlp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7qtv"]
+atlas = ExtResource("1_punej")
+region = Rect2(80, 120, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yntlp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7qtv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_punej"]
+radius = 3.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yntlp"]
+radius = 4.0
+
+[node name="Projectile" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 12
+can_sleep = false
+script = ExtResource("1_yntlp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.5, -0.5)
+sprite_frames = SubResource("SpriteFrames_yntlp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_punej")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_yntlp")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
