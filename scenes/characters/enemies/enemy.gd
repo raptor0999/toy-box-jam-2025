@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var max_follow_dist = 100.0
 
 var player : CharacterBody2D
+var target_node = null
 
 func _ready():
 	_anim.play("default")
@@ -15,10 +16,22 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
+	var direction
 	
-	var direction := position.direction_to(player.position)
+	if target_node == null:
+		direction = Vector2.ZERO
+		var distance = null
+		for c in get_tree().get_nodes_in_group("chick"):
+			print_debug("chick hit")
+			if (not distance or distance > position.distance_to(c.global_position)) and position.distance_to(c.global_position) < max_follow_dist:
+				distance = position.distance_to(c.global_position)
+				print_debug("got a hit")
+				target_node = c
+				
+		
 	
-	if position.distance_to(player.global_position) < max_follow_dist and position.distance_to(player.global_position) > min_follow_dist:
+	if target_node != null and position.distance_to(target_node.global_position) > min_follow_dist:
+		direction = position.direction_to(target_node.global_position)
 		velocity = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)

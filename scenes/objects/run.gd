@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+
 @onready var rescue_sfx : AudioStreamPlayer2D = $AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +16,7 @@ func _process(delta: float) -> void:
 func _on_rescue_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("chick"):
 		if not body.rescued:
+			body.set_collision_mask_value(6, false)
 			body.rescued = true
 			var hud = get_tree().root.find_child("HUD", true, false)
 			hud.chicks_rescued += 1

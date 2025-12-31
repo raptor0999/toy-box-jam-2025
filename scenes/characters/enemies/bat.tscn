@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b5nrbts4a3fh6"]
 
-[ext_resource type="Texture2D" uid="uid://dwx7lnwvyrvqk" path="res://assets/art/toyBoxJam3b.png" id="1_bc3kv"]
 [ext_resource type="Script" uid="uid://o4e50n77hh1g" path="res://scenes/characters/enemies/enemy.gd" id="1_va5m3"]
+[ext_resource type="Texture2D" uid="uid://cevj7lq263jt" path="res://assets/art/tileset_2023_toby.png" id="2_va5m3"]
 
 [sub_resource type="Gradient" id="Gradient_va5m3"]
 offsets = PackedFloat32Array(0.452381, 0.472222)
@@ -13,25 +13,24 @@ fill = 1
 fill_from = Vector2(0.504274, 0.491453)
 fill_to = Vector2(0.444444, 0.525641)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_va5m3"]
-radius = 4.0
-height = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_va5m3"]
+size = Vector2(6, 5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r6x73"]
-atlas = ExtResource("1_bc3kv")
-region = Rect2(40, 120, 8, 8)
+atlas = ExtResource("2_va5m3")
+region = Rect2(72, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1a30h"]
-atlas = ExtResource("1_bc3kv")
-region = Rect2(48, 120, 8, 8)
+atlas = ExtResource("2_va5m3")
+region = Rect2(80, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kg0c1"]
-atlas = ExtResource("1_bc3kv")
-region = Rect2(56, 120, 8, 8)
+atlas = ExtResource("2_va5m3")
+region = Rect2(88, 0, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ldh6e"]
-atlas = ExtResource("1_bc3kv")
-region = Rect2(64, 120, 8, 8)
+atlas = ExtResource("2_va5m3")
+region = Rect2(96, 0, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pae0w"]
 animations = [{
@@ -53,7 +52,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bat" type="CharacterBody2D"]
+[node name="Bat" type="CharacterBody2D" groups=["bat"]]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_va5m3")
@@ -66,7 +65,8 @@ offset_bottom = 43.0
 texture = SubResource("GradientTexture2D_r6x73")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_va5m3")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_va5m3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pae0w")

@@ -16,9 +16,8 @@ fill = 1
 fill_from = Vector2(0.504274, 0.491453)
 fill_to = Vector2(0.444444, 0.525641)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2mhh"]
-radius = 2.0
-height = 6.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u68rv"]
+size = Vector2(4, 5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ll1a"]
 atlas = ExtResource("1_u6evy")
@@ -60,7 +59,8 @@ offset_bottom = 36.0
 texture = SubResource("GradientTexture2D_e2mhh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_e2mhh")
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_u68rv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

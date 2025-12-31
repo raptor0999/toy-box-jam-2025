@@ -7,16 +7,21 @@ extends CharacterBody2D
 @export var SPEED_VARIATION = 0.7
 @export var min_follow_dist = 10.0
 @export var max_follow_dist = 100.0
+@export var scare_dist = 30.0
 
 @export var cluck_timer_max = 3.0
 @export var cluck_prob = 0.5
 
 @export var move_timer_max = 1.8
 
+@export var scare_timer_max = 1.0
+
 var chicken : CharacterBody2D
 var rescued = false
+var scared = false
 var cluck_timer = cluck_timer_max
 var move_timer = move_timer_max
+var scare_timer = scare_timer_max
 
 var direction = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
 
@@ -33,13 +38,25 @@ func _process(delta: float) -> void:
 			
 	if move_timer > 0.0:
 		move_timer -= delta
+		
+	if scared:
+		scare_timer -= delta
+		
+	# see if scared
+	if scare_timer < 0.0:
+		scared = false
+		
+	for b in get_tree().get_nodes_in_group("bat"):
+		if position.distance_to(b.position) <= scare_dist:
+			scared = true
+			scare_timer = scare_timer_max
 
 func _physics_process(delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	chicken = get_tree().get_first_node_in_group("chicken")
 	
-	if not rescued:
+	if not rescued and not scared:
 		if is_instance_valid(chicken) and position.distance_to(chicken.global_position) < max_follow_dist and position.distance_to(chicken.global_position) > min_follow_dist:
 			direction = position.direction_to(chicken.global_position)
 			velocity = direction * SPEED
@@ -55,5 +72,9 @@ func _physics_process(delta: float) -> void:
 	if rescued:
 		velocity.x = move_toward(velocity.x, 0, 0.5)
 		velocity.y = move_toward(velocity.y, 0, 0.5)
+		
+	if scared:
+		velocity.x = move_toward(velocity.x, 0, SPEED/2)
+		velocity.y = move_toward(velocity.y, 0, SPEED/2)
 	
 	move_and_slide()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b21lwkvpf3grc"]
+[gd_scene load_steps=12 format=3 uid="uid://b21lwkvpf3grc"]
 
 [ext_resource type="Script" uid="uid://bqhgjlgmdpl67" path="res://scenes/characters/player/player.gd" id="1_t61fv"]
 [ext_resource type="Texture2D" uid="uid://cevj7lq263jt" path="res://assets/art/tileset_2023_toby.png" id="2_t61fv"]
@@ -47,12 +47,14 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hv5x3"]
-radius = 4.0
-height = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hss88"]
+size = Vector2(5, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t61fv"]
-size = Vector2(10, 5)
+size = Vector2(15, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_686vu"]
+size = Vector2(5, 10)
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 21
@@ -70,7 +72,8 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_blysn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_hv5x3")
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_hss88")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -81,9 +84,17 @@ collision_layer = 2
 collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordKillBox"]
-position = Vector2(5, 0.5)
+position = Vector2(7.5, 1)
 shape = SubResource("RectangleShape2D_t61fv")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
+[node name="CollectBox" type="Area2D" parent="."]
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectBox"]
+position = Vector2(0.5, 2)
+shape = SubResource("RectangleShape2D_686vu")
+
 [connection signal="body_entered" from="SwordKillBox" to="." method="_on_sword_kill_box_body_entered"]
+[connection signal="area_entered" from="CollectBox" to="." method="_on_collect_box_area_entered"]

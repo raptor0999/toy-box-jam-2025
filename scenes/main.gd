@@ -13,6 +13,7 @@ enum Difficulty { EASY = 0, MEDIUM = 1, HARD = 2 }
 
 var map_node
 var hud_node
+var player_node
 var level_finished = false
 var win = false
 var lose = false
@@ -22,6 +23,7 @@ var lives = max_lives
 func _ready() -> void:
 	map_node = get_node("Map")
 	hud_node = get_node("UI/HUD")
+	player_node = get_node("Player")
 	start_next_level()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -94,7 +96,7 @@ func finish_level():
 	level_finished = true
 	level_number += 1
 	level_timer.stop()
-	if level_number > 5:
+	if level_number > 7:
 		win_game()
 	else:
 		level_end_music.play()
@@ -106,6 +108,8 @@ func win_game():
 	AudioPlayer.stop_music()
 	win_music.play()
 	level_number = 1
+	player_node.has_sword = false
+	player_node.has_spell = false
 	
 func lose_game():
 	hud_node.timer_label.text = "0.00"
@@ -121,6 +125,8 @@ func lose_game():
 	if lives < 1:
 		level_number = 1
 		lives = max_lives
+		player_node.has_sword = false
+		player_node.has_spell = false
 
 func _on_level_timer_timeout() -> void:
 	lose_game()

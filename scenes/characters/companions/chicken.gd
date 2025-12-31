@@ -33,7 +33,10 @@ func _physics_process(delta: float) -> void:
 	if position.distance_to(player.global_position) < max_follow_dist and position.distance_to(player.global_position) > min_follow_dist:
 		velocity = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		if position.distance_to(player.global_position) <= min_follow_dist:
+			velocity = -direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.y = move_toward(velocity.y, 0, SPEED)
 
 	move_and_slide()

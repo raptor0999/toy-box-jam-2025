@@ -2,14 +2,15 @@ extends CharacterBody2D
 
 @export var SPEED = 200.0
 @export var attack_speed = 0.2
+@export var has_sword = false
+@export var has_spell = false
 
 @onready var _anim : AnimatedSprite2D = $AnimatedSprite2D
 @onready var _swordKillBox : Area2D = $SwordKillBox
 @onready var _shadow : TextureRect = $TextureRect
 
 var projectile = preload("res://scenes/characters/objects/projectile.tscn")
-var has_sword = false
-var has_spell = false
+
 var is_attacking = false
 var attack_timer = 0.0
 var main_node
@@ -73,3 +74,8 @@ func _on_sword_kill_box_body_entered(body: Node2D) -> void:
 	if body.name.contains("Bat"):
 		body.queue_free()
 		AudioPlayer.play_sfx("die")
+
+func _on_collect_box_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("sword"):
+		has_sword = true
+		area.get_parent().queue_free()
