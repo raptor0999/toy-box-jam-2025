@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dy46t5cwuf8fm"
+path="res://.godot/imported/04 Morning Shower.ogg-d76cbb3ddd4af0fbfedbb3d548c8d024.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/music/04 Morning Shower.ogg"
+dest_files=["res://.godot/imported/04 Morning Shower.ogg-d76cbb3ddd4af0fbfedbb3d548c8d024.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.91
+bpm=0
+beat_count=0
+bar_beats=4

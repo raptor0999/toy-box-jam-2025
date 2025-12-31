@@ -1,0 +1,83 @@
+[gd_scene load_steps=15 format=3 uid="uid://ltovf2ddm7ks"]
+
+[ext_resource type="Script" uid="uid://cmovglnyinjcn" path="res://scenes/characters/companions/chick.gd" id="1_e13ei"]
+[ext_resource type="Texture2D" uid="uid://biask6h4qny10" path="res://assets/art/tbjTHATS_A_LOT_OF_CHICKENS_-_transp_1-1.png" id="2_rv2qv"]
+[ext_resource type="AudioStream" uid="uid://c78sgm4xqhwlk" path="res://assets/audio/sfx/chickens/chick/chick_01.ogg" id="3_ekq4s"]
+[ext_resource type="AudioStream" uid="uid://bdlbiba75ja22" path="res://assets/audio/sfx/chickens/chick/chick_02.ogg" id="4_g7sec"]
+[ext_resource type="AudioStream" uid="uid://dhvv1nmgmturp" path="res://assets/audio/sfx/chickens/chick/chick_03.ogg" id="5_xx57t"]
+[ext_resource type="AudioStream" uid="uid://bm4rj1fohm02" path="res://assets/audio/sfx/chickens/chick/chick_04.ogg" id="6_b6rlp"]
+
+[sub_resource type="Gradient" id="Gradient_va5m3"]
+offsets = PackedFloat32Array(0.452381, 0.472222)
+colors = PackedColorArray(0.129558, 0.129558, 0.129558, 0.713726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2mhh"]
+gradient = SubResource("Gradient_va5m3")
+fill = 1
+fill_from = Vector2(0.504274, 0.491453)
+fill_to = Vector2(0.465812, 0.521368)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2mhh"]
+radius = 2.0
+height = 4.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv2qv"]
+atlas = ExtResource("2_rv2qv")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wsmed"]
+atlas = ExtResource("2_rv2qv")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bowe5"]
+atlas = ExtResource("2_rv2qv")
+region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u68rv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv2qv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wsmed")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bowe5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xagqk"]
+streams_count = 4
+stream_0/stream = ExtResource("3_ekq4s")
+stream_1/stream = ExtResource("4_g7sec")
+stream_2/stream = ExtResource("5_xx57t")
+stream_3/stream = ExtResource("6_b6rlp")
+
+[node name="Chick" type="CharacterBody2D" groups=["chick"]]
+collision_layer = 32
+collision_mask = 52
+script = ExtResource("1_e13ei")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -33.0
+offset_top = -29.0
+offset_right = 31.0
+offset_bottom = 35.0
+texture = SubResource("GradientTexture2D_e2mhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CapsuleShape2D_e2mhh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(2, -1)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_u68rv")
+frame_progress = 0.779509
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_xagqk")

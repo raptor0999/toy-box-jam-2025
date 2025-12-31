@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3 uid="uid://ubv7qnlcf0s0"]
+
+[ext_resource type="Texture2D" uid="uid://cml0o61so5smn" path="res://assets/art/chicken_run.png" id="1_08x5e"]
+[ext_resource type="Script" uid="uid://b24c675c0wrvj" path="res://scenes/objects/run.gd" id="1_ifxro"]
+[ext_resource type="AudioStream" uid="uid://i8wqnxstrghj" path="res://assets/audio/sfx/run/sfxpack_9.ogg" id="3_7lw3o"]
+[ext_resource type="AudioStream" uid="uid://cnic7ckmbm7jt" path="res://assets/audio/sfx/run/sfxpack_10.ogg" id="4_xxl58"]
+[ext_resource type="AudioStream" uid="uid://bsxm2rel4aafi" path="res://assets/audio/sfx/run/sfxpack_11.ogg" id="5_jcqnl"]
+[ext_resource type="AudioStream" uid="uid://cefx12blnek2n" path="res://assets/audio/sfx/run/sfxpack_12.ogg" id="6_kwvo6"]
+[ext_resource type="AudioStream" uid="uid://dw5s3gxy5yhsc" path="res://assets/audio/sfx/run/sfxpack_13.ogg" id="7_7w05h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_08x5e"]
+size = Vector2(48, 48)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e3xig"]
+streams_count = 5
+stream_0/stream = ExtResource("3_7lw3o")
+stream_1/stream = ExtResource("4_xxl58")
+stream_2/stream = ExtResource("5_jcqnl")
+stream_3/stream = ExtResource("6_kwvo6")
+stream_4/stream = ExtResource("7_7w05h")
+
+[node name="Run" type="StaticBody2D"]
+collision_layer = 16
+script = ExtResource("1_ifxro")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_08x5e")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-31, -31, -31, 31, -17.5, 31, -16.7, 28.2, -25, 22.2, -25, -22.9, -22, -24.9, 24, -24, 24.8, -24, 25, -23.5, 25, 22.8, 16.7, 28.1, 17.5, 31, 31, 31, 31, -31)
+
+[node name="RescueArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RescueArea"]
+shape = SubResource("RectangleShape2D_08x5e")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_e3xig")
+max_polyphony = 8
+
+[connection signal="body_entered" from="RescueArea" to="." method="_on_rescue_area_body_entered"]

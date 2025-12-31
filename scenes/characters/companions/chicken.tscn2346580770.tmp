@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3ptjhaoic2qs"]
+
+[ext_resource type="Script" uid="uid://cti76d4iy3t52" path="res://scenes/characters/companions/chicken.gd" id="1_e2mhh"]
+[ext_resource type="Texture2D" uid="uid://biask6h4qny10" path="res://assets/art/tbjTHATS_A_LOT_OF_CHICKENS_-_transp_1-1.png" id="1_u6evy"]
+[ext_resource type="AudioStream" uid="uid://dvxymwtxbrlq0" path="res://assets/audio/sfx/chickens/chicken/chicken_cluck_08.wav" id="3_u68rv"]
+[ext_resource type="AudioStream" uid="uid://dwbgi5lmhf00k" path="res://assets/audio/sfx/chickens/chicken/chicken_cluck_09.wav" id="4_nskxq"]
+[ext_resource type="AudioStream" uid="uid://olyufowbafro" path="res://assets/audio/sfx/chickens/chicken/chicken_cluck_10.wav" id="5_5m272"]
+
+[sub_resource type="Gradient" id="Gradient_va5m3"]
+offsets = PackedFloat32Array(0.452381, 0.472222)
+colors = PackedColorArray(0.129558, 0.129558, 0.129558, 0.713726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e2mhh"]
+gradient = SubResource("Gradient_va5m3")
+fill = 1
+fill_from = Vector2(0.504274, 0.491453)
+fill_to = Vector2(0.444444, 0.525641)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e2mhh"]
+radius = 2.0
+height = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ll1a"]
+atlas = ExtResource("1_u6evy")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvr6k"]
+atlas = ExtResource("1_u6evy")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u68rv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ll1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvr6k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_657ns"]
+streams_count = 3
+stream_0/stream = ExtResource("3_u68rv")
+stream_1/stream = ExtResource("4_nskxq")
+stream_2/stream = ExtResource("5_5m272")
+
+[node name="Chicken" type="CharacterBody2D" groups=["chicken"]]
+collision_mask = 21
+script = ExtResource("1_e2mhh")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -32.0
+offset_top = -28.0
+offset_right = 32.0
+offset_bottom = 36.0
+texture = SubResource("GradientTexture2D_e2mhh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_e2mhh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_u68rv")
+frame_progress = 0.195389
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_657ns")

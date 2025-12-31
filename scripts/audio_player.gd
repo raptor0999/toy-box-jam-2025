@@ -3,12 +3,12 @@ extends Node
 @onready var _music : AudioStreamPlayer = $Music
 @onready var _sfx : AudioStreamPlayer = $SFX
 
-var die_sfx = preload("res://assets/audio/sfx/sfxpack_48.wav")
-var sword_sfx = preload("res://assets/audio/sfx/sfxpack_33.wav")
-var shoot_sfx = preload("res://assets/audio/sfx/sfxpack_62.wav")
+var die_sfx = preload("res://assets/audio/sfx/sfxpack_48.ogg")
+var sword_sfx = preload("res://assets/audio/sfx/sfxpack_33.ogg")
+var shoot_sfx = preload("res://assets/audio/sfx/sfxpack_62.ogg")
 
 func _ready() -> void:
-	_music.play()
+	pass
 	
 func play_sfx(name):
 	if name == "shoot":
@@ -19,3 +19,9 @@ func play_sfx(name):
 		_sfx.stream = die_sfx
 		
 	_sfx.play()
+
+func play_music():
+	_music.play()
+
+func stop_music():
+	_music.stop()
