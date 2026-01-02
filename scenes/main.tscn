@@ -11,7 +11,6 @@
 [node name="Main" type="Node2D"]
 process_mode = 3
 script = ExtResource("1_jyhfs")
-level_number = 3
 
 [node name="Map" type="Node2D" parent="."]
 process_mode = 1

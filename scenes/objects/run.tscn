@@ -40,4 +40,12 @@ shape = SubResource("RectangleShape2D_08x5e")
 stream = SubResource("AudioStreamRandomizer_e3xig")
 max_polyphony = 8
 
+[node name="Label" type="Label" parent="."]
+offset_left = -3.0
+offset_top = -40.0
+offset_right = 37.0
+offset_bottom = -23.0
+theme_override_font_sizes/font_size = 5
+text = "Color"
+
 [connection signal="body_entered" from="RescueArea" to="." method="_on_rescue_area_body_entered"]

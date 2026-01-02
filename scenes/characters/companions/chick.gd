@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var _anim : AnimatedSprite2D = $AnimatedSprite2D
 @onready var cluck_sfx : AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var color_label : Label = $Label
 
 @export var SPEED = 50.0
 @export var SPEED_VARIATION = 0.7
@@ -16,6 +17,8 @@ extends CharacterBody2D
 
 @export var scare_timer_max = 1.0
 
+@export var capture_color :Global.CaptureColor = Global.CaptureColor.RED
+
 var chicken : CharacterBody2D
 var rescued = false
 var scared = false
@@ -27,6 +30,14 @@ var direction = Vector2(randf_range(-1,1), randf_range(-1,1)).normalized()
 
 func _ready():
 	_anim.play("default")
+	
+	match capture_color:
+		Global.CaptureColor.RED:
+			color_label.text = "R"
+		Global.CaptureColor.GREEN:
+			color_label.text = "G"
+		Global.CaptureColor.BLUE:
+			color_label.text = "B"
 	
 func _process(delta: float) -> void:
 	if cluck_timer > 0.0:
