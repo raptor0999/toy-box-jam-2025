@@ -30,13 +30,9 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := position.direction_to(player.position)
 	
-	if position.distance_to(player.global_position) < max_follow_dist and position.distance_to(player.global_position) > min_follow_dist:
+	if position.distance_to(player.global_position) < max_follow_dist and position.distance_to(player.global_position) >= min_follow_dist:
 		velocity = direction * SPEED
 	else:
-		if position.distance_to(player.global_position) <= min_follow_dist:
-			velocity = -direction * SPEED
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity = Vector2.ZERO
 
 	move_and_slide()

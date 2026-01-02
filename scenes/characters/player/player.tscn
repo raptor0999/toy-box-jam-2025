@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b21lwkvpf3grc"]
+[gd_scene load_steps=14 format=3 uid="uid://b21lwkvpf3grc"]
 
 [ext_resource type="Script" uid="uid://bqhgjlgmdpl67" path="res://scenes/characters/player/player.gd" id="1_t61fv"]
 [ext_resource type="Texture2D" uid="uid://cevj7lq263jt" path="res://assets/art/tileset_2023_toby.png" id="2_t61fv"]
@@ -19,9 +19,17 @@ region = Rect2(24, 0, 16, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_686vu"]
 atlas = ExtResource("2_t61fv")
-region = Rect2(8, 0, 8, 8)
+region = Rect2(11, 0, 5, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hss88"]
+atlas = ExtResource("2_t61fv")
+region = Rect2(18, 0, 5, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qd3e3"]
+atlas = ExtResource("2_t61fv")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6avc5"]
 atlas = ExtResource("2_t61fv")
 region = Rect2(16, 0, 8, 8)
 
@@ -44,6 +52,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qd3e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6avc5")
+}],
+"loop": true,
+"name": &"sword",
 "speed": 5.0
 }]
 
@@ -70,6 +89,7 @@ texture = SubResource("GradientTexture2D_t61fv")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_blysn")
+animation = &"sword"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 0.5)

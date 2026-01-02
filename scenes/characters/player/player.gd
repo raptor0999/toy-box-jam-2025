@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 			is_attacking = false
 			_shadow.position.x = -32.0
 			_swordKillBox.process_mode = Node.PROCESS_MODE_DISABLED
-			_anim.play("default")
+			_anim.play("sword")
 			
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -78,4 +78,5 @@ func _on_sword_kill_box_body_entered(body: Node2D) -> void:
 func _on_collect_box_area_entered(area: Area2D) -> void:
 	if area.get_parent().is_in_group("sword"):
 		has_sword = true
+		_anim.play("sword")
 		area.get_parent().queue_free()

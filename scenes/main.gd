@@ -35,6 +35,12 @@ func _process(delta: float) -> void:
 			hud_node.timer_label.text = "HRD " + "%0.2f" % level_timer.time_left
 		
 func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused:
+			get_tree().paused = false
+		else:
+			get_tree().paused = true
+			
 	if Input.is_action_just_pressed("switch_difficulty"):
 		match difficulty:
 			Difficulty.EASY:
@@ -96,7 +102,7 @@ func finish_level():
 	level_finished = true
 	level_number += 1
 	level_timer.stop()
-	if level_number > 7:
+	if level_number > 10:
 		win_game()
 	else:
 		level_end_music.play()

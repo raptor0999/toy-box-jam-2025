@@ -233,6 +233,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAEAAIAAAAAAAEAAAAEAAIAAAD//wEAAAAEAAI
 tile_set = SubResource("TileSet_ihfcg")
 
 [node name="Trees" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD8/woAAAAHAAQAAAD8/wwAAAAHAAQAAAD+/w4AAAAHAAQAAAD//w4AAAAHAAQAAAABAA4AAAAHAAQAAAACAA0AAAAHAAQAAAADAAwAAAAHAAQAAAAEAAoAAAAHAAQAAAAFAAoAAAAHAAQAAAAGAAoAAAAHAAQAAAADAA4AAAAHAAUAAAAEAAwAAAAHAAUAAAD6/woAAAAHAAUAAAA=")
 tile_set = SubResource("TileSet_ihfcg")
 
 [node name="Enemies" type="Node2D" parent="."]

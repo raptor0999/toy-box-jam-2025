@@ -1,0 +1,130 @@
+[gd_scene load_steps=14 format=3 uid="uid://q0ouvsqjjelj"]
+
+[ext_resource type="Texture2D" uid="uid://cevj7lq263jt" path="res://assets/art/tileset_2023_toby.png" id="1_a4j8e"]
+[ext_resource type="Script" uid="uid://dbdixdoqu857m" path="res://scenes/objects/ship.gd" id="1_x2d0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnfjl"]
+size = Vector2(8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a4j8e"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(32, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2d0j"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(0, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fnfjl"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(16, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqjs4"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(8, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2r6bp"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(24, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k7h2"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(48, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tt7h6"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(56, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yajms"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(40, 80, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mybrk"]
+atlas = ExtResource("1_a4j8e")
+region = Rect2(32, 80, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f0t3k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a4j8e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2d0j")
+}],
+"loop": true,
+"name": &"e",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fnfjl")
+}],
+"loop": true,
+"name": &"n",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqjs4")
+}],
+"loop": true,
+"name": &"ne",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2r6bp")
+}],
+"loop": true,
+"name": &"nw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k7h2")
+}],
+"loop": true,
+"name": &"s",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tt7h6")
+}],
+"loop": true,
+"name": &"se",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yajms")
+}],
+"loop": true,
+"name": &"sw",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mybrk")
+}],
+"loop": true,
+"name": &"w",
+"speed": 5.0
+}]
+
+[node name="Ship" type="CharacterBody2D"]
+collision_mask = 256
+script = ExtResource("1_x2d0j")
+SPEED = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fnfjl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_f0t3k")
+animation = &"w"
